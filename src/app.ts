@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-app.use('/api/drinks', (req, res, next) => {
+app.use('/api/drinks', (req: any, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { _id: string; name: string; description: string; imageUrl: string; price: number; userId: string; }[]): void; new(): any; }; }; }, next: any) => {
   const stuff = [
     {
       _id: '1',

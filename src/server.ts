@@ -1,7 +1,7 @@
 const http = require('http');
-const app = require('./app');
+const importApp = require('./app');
 
-const normalizePort = val => {
+const normalizePort = (val: string) => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -13,9 +13,9 @@ const normalizePort = val => {
   return false;
 };
 const port = normalizePort(process.env.PORT || '1337');
-app.set('port', port);
+importApp.set('port', port);
 
-const errorHandler = error => {
+const errorHandler = (error: { syscall: string; code: any; }) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -35,7 +35,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(importApp);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
