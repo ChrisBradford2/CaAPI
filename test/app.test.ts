@@ -1,6 +1,3 @@
-const mongoose = require('mongoose');
-const Drink = require('../src/models/drink');
-
 describe('Test', () => {
   it('should return true', () => {
     expect(true).toBe(true);
