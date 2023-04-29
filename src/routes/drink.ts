@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import { router } from "../utils/utils";
 
+const auth = require('../middleware/auth');
 const drinkCtrl = require('../controllers/drink');
 
-router.post('/', drinkCtrl.createDrink);
-router.put('/:id', drinkCtrl.modifyDrink);
-router.delete('/:id', drinkCtrl.deleteDrink);
-router.get('/', drinkCtrl.getAllDrink);
-router.get('/:id', drinkCtrl.getOneDrink);
+router.post('/', auth, drinkCtrl.createDrink);
+router.put('/:id', auth, drinkCtrl.modifyDrink);
+router.delete('/:id', auth, drinkCtrl.deleteDrink);
+router.get('/', auth, drinkCtrl.getAllDrink);
+router.get('/:id', auth, drinkCtrl.getOneDrink);
 
 module.exports = router;

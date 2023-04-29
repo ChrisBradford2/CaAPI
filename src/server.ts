@@ -35,16 +35,15 @@ const errorHandler = (error: { syscall: string; code: any; }) => {
   }
 };
 
+export const date = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+
 const server = http.createServer(importApp);
-
-const bind = '127.0.0.1:3000'; // exemple de message
-
-const boxWidth = bind.length + 20; // Largeur de la boîte (6 = nombre de caractères supplémentaires pour le cadre)
 
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+  const boxWidth = bind.length + 25;
   // Dessiner la boîte supérieure
   console.log('+' + '-'.repeat(boxWidth - 2) + '+');
   console.log('|' + ' '.repeat(boxWidth - 2) + '|');

@@ -2,9 +2,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
-import mongoose from 'mongoose';;
+import mongoose from 'mongoose';
+import path from 'path';
 
 app.use(bodyParser.json());
+
+const userRoutes = require('./routes/user');
+app.use('/api/auth', userRoutes);
 
 const drinkRoutes = require('./routes/drink')
 app.use('/api/drink', drinkRoutes);
@@ -21,5 +25,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
     useUnifiedTopology: true } as mongoose.ConnectOptions)
   .then(() => console.log('[\x1b[32mOK\x1b[0m] MongoDB connection'))
   .catch(() => console.log('[\x1b[31mERROR\x1b[0m] MongoDB connection'));
+
+app.use('/', express.static(path.join(__dirname, '../public')));
 
 module.exports = app;

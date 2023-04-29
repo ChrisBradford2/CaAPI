@@ -10,7 +10,7 @@ exports.createDrink = (req: any, res: any, next: any) => {
   drink.save().then(
     () => {
       res.status(201).json({
-        message: 'Drink saved successfully!'
+        drink: drink,
       }) && console.log('[\x1b[33mPOST\x1b[0m] ' + date + ' - /api/drink | \x1b[32m201\x1b[0m')
     }
   ).catch(
@@ -32,7 +32,7 @@ exports.modifyDrink = (req: any, res: any, next: any) => {
   Drink.updateOne({_id: req.params.id}, drink).then(
     () => {
       res.status(201).json({
-        message: 'Drink updated successfully!'
+        drink: drink,
       }) && console.log('[\x1b[34mPUT\x1b[0m] ' + date + ' - /api/drink/' + req.params.id + ' | \x1b[32m201\x1b[0m')
     }
   ).catch(
