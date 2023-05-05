@@ -17,7 +17,7 @@ exports.signup = (req: { body: { password: any; email: any; }; }, res: { status:
 };
 
 exports.login = (req: { body: { email: any; password: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message?: string; userId?: any; token?: string; error?: any; }): any; new(): any; }; }; }, next: any) => {
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email.toString() })
       .then((user: any) => {
           if (!user) {
               return res.status(401).json({ message: 'Paire login/mot de passe incorrecte'})
