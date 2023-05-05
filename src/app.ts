@@ -24,7 +24,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
   { useNewUrlParser: true,
     useUnifiedTopology: true } as mongoose.ConnectOptions)
   .then(() => console.log('[\x1b[32mOK\x1b[0m] MongoDB connection'))
-  .catch(() => console.log('[\x1b[31mERROR\x1b[0m] MongoDB connection'));
+  .catch((error: Error) => console.log(`[\x1b[31mERROR\x1b[0m] ${error}`));
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 

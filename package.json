@@ -6,6 +6,7 @@
   "repository": "git@github.com:ChrisBradford2/CaAPI.git",
   "author": "Nicolas Barbarisi <nico.bar2012@gmail.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "yarn run nodemon",
     "start": "yarn build && node build/server.js",
@@ -29,5 +30,6 @@
     "dotenv": "^16.0.3",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
