@@ -1,4 +1,5 @@
-import { router } from "../utils/utils";
+const express = require('express');
+const router = express.Router();
 import limiter from "../utils/ratelimit";
 
 const userCtrl = require('../controllers/user');

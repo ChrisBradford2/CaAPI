@@ -1,13 +1,13 @@
-import { router } from "../utils/utils";
-import limiter from "../utils/ratelimit";
+const express = require('express');
+const router = express.Router();
 
 const auth = require('../middleware/auth');
 const drinkCtrl = require('../controllers/drink');
 
-router.post('/',limiter, auth, drinkCtrl.createDrink);
-router.put('/:id',limiter, auth, drinkCtrl.modifyDrink);
-router.delete('/:id',limiter, auth, drinkCtrl.deleteDrink);
-router.get('/',limiter, auth, drinkCtrl.getAllDrink);
-router.get('/:id',limiter, auth, drinkCtrl.getOneDrink);
+router.post('/', drinkCtrl.createDrink);
+router.put('/:id', drinkCtrl.modifyDrink);
+router.delete('/:id', drinkCtrl.deleteDrink);
+router.get('/', drinkCtrl.getAllDrink);
+router.get('/:id', drinkCtrl.getOneDrink);
 
 module.exports = router;

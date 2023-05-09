@@ -10,8 +10,14 @@ app.use(bodyParser.json());
 const userRoutes = require('./routes/user');
 app.use('/api/auth', userRoutes);
 
+const consumptionRoutes = require('./routes/consumption')
+app.use('/api/consumption', consumptionRoutes);
+
 const drinkRoutes = require('./routes/drink')
 app.use('/api/drink', drinkRoutes);
+
+const consumptionDrinksRoutes = require('./routes/consumptionDrinks')
+app.use('/api/consumption_drinks', consumptionDrinksRoutes);
 
 app.use((req: any, res: { setHeader: (arg0: string, arg1: string) => void; }, next: () => void) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

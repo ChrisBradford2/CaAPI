@@ -2,7 +2,22 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.signup = (req: { body: { password: any; email: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message?: string; error?: any; }): any; new(): any; }; }; }, next: any) => {
+exports.signup = (req: { body: { email: string; password: string; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string | Error; message?: string; data?: any; }): any; new(): any; }; }; }, next: any) => {
+  switch (true) {
+    case !req.body.email:
+      return res.status(400).json({ error: 'Email is missing' });
+    case req.body.email === '':
+      return res.status(400).json({ error: 'Email is empty' });
+    case !/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(req.body.email):
+      return res.status(400).json({ error: 'Email is not valid, please enter a valid email' });
+    case !req.body.password:
+      return res.status(400).json({ error: 'Password is missing' });
+    case req.body.password === '':
+      return res.status(400).json({ error: 'Password is empty' });
+    case !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(req.body.password):
+      return res.status(400).json({ error: 'Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter and 1 number' });
+  }
+
   bcrypt.hash(req.body.password, 10)
     .then((hash: string) => {
       const user = new User({
@@ -10,7 +25,13 @@ exports.signup = (req: { body: { password: any; email: any; }; }, res: { status:
         password: hash
       });
       user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }) )
+        .then(() => res.status(201).json({
+          message: 'User created successfully!',
+          data : {
+            email: user.email,
+            userId: user._id
+          }
+        }) )
         .catch((error: Error) => res.status(400).json({ error }))
     })
     .catch((error: Error) => res.status(500).json({ error }));
